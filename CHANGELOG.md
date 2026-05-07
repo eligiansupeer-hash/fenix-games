@@ -16,6 +16,6 @@ El formato sigue Keep a Changelog y el proyecto usa commits convencionales.
 
 - Fase 0: `.\gradlew.bat assembleDebug --no-daemon --stacktrace` finalizo con `BUILD SUCCESSFUL`.
 
-### Blocked
+### Changed
 
-- Creacion/push del repositorio remoto `eligiansupeer-hash/fenix-game`: la maquina no tiene `gh`, no hay `GH_TOKEN/GITHUB_TOKEN` local y la herramienta GitHub disponible devuelve 404 para el repo.
+- Repositorio remoto definitivo actualizado a `eligiansupeer-hash/fenix-games`.

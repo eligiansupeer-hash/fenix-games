@@ -10,7 +10,7 @@ Este documento es la guia operativa del proyecto `fenix-game`. Fue derivado del 
 - Contenido base e importable mediante JSON local y `kotlinx.serialization`.
 - Importacion/exportacion mediante Storage Access Framework Android, sin permisos obsoletos de almacenamiento.
 - Red local avanzada solo en fases finales mediante Ktor embebido, WebSocket, QR y Foreground Service.
-- Git con rama `main`, commits convencionales y repositorio remoto publico `eligiansupeer-hash/fenix-game`.
+- Git con rama `main`, commits convencionales y repositorio remoto publico `eligiansupeer-hash/fenix-games`.
 
 ## Politica de Terminal y Validacion
 
