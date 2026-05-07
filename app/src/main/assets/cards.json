@@ -1,0 +1,38 @@
+{
+  "id": "base-family-pack",
+  "name": "Fenix Base Familiar",
+  "version": 1,
+  "cards": [
+    {
+      "id": "never-001",
+      "mode": "NEVER_HAVE_I_EVER",
+      "text": "Yo nunca me quede despierto hasta tarde jugando.",
+      "intensity": 0
+    },
+    {
+      "id": "never-002",
+      "mode": "NEVER_HAVE_I_EVER",
+      "text": "Yo nunca invente una regla para ganar una partida.",
+      "intensity": 0
+    },
+    {
+      "id": "never-003",
+      "mode": "NEVER_HAVE_I_EVER",
+      "text": "Yo nunca acuse a alguien sin pruebas durante un juego.",
+      "intensity": 0
+    },
+    {
+      "id": "truth-001",
+      "mode": "TRUTH",
+      "text": "Cual fue la partida mas divertida que recuerdas?",
+      "intensity": 0
+    },
+    {
+      "id": "dare-001",
+      "mode": "DARE",
+      "text": "Haz una celebracion silenciosa como si hubieras ganado.",
+      "intensity": 0
+    }
+  ]
+}
+

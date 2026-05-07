@@ -51,7 +51,7 @@ Criterio de aceptacion:
 
 Estado actual: completada localmente. Validacion ejecutada con `.\gradlew.bat assembleDebug --no-daemon --stacktrace` y resultado `BUILD SUCCESSFUL`.
 
-Validacion fisica inicial: APK debug instalada y lanzada por ADB Wi-Fi en dispositivo `2409BRN2CY` (`lake_eea`). Queda pendiente repetir instalacion en Samsung A10 cuando aparezca conectado en `adb devices -l`.
+Validacion fisica inicial: APK debug instalada y lanzada por ADB Wi-Fi en dispositivo `2409BRN2CY` (`lake_eea`) y Samsung A10 `SM_A105M` (`a10ub`).
 
 ## Fase 1 - Nucleo Offline
 
@@ -73,6 +73,8 @@ Criterio de aceptacion:
 - La app arranca en modo avion con datos locales.
 - No se repiten cartas dentro de una sesion activa.
 - Build de fase completo con un solo comando pesado.
+
+Estado actual: completada localmente. Validacion ejecutada con `.\gradlew.bat assembleDebug --no-daemon --stacktrace` y resultado `BUILD SUCCESSFUL`. APK instalada y lanzada en Samsung A10 `SM_A105M` y Redmi 14C `2409BRN2CY`; ambos mantuvieron proceso `com.fenixgames` vivo.
 
 ## Fase 2 - Caja Negra Fenix
 
