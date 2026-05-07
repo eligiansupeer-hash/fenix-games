@@ -51,6 +51,8 @@ Criterio de aceptacion:
 
 Estado actual: completada localmente. Validacion ejecutada con `.\gradlew.bat assembleDebug --no-daemon --stacktrace` y resultado `BUILD SUCCESSFUL`.
 
+Validacion fisica inicial: APK debug instalada y lanzada por ADB Wi-Fi en dispositivo `2409BRN2CY` (`lake_eea`). Queda pendiente repetir instalacion en Samsung A10 cuando aparezca conectado en `adb devices -l`.
+
 ## Fase 1 - Nucleo Offline
 
 Objetivo: crear el motor local minimo para sesiones y contenido.

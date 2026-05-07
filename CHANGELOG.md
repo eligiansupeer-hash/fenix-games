@@ -15,6 +15,7 @@ El formato sigue Keep a Changelog y el proyecto usa commits convencionales.
 ### Validated
 
 - Fase 0: `.\gradlew.bat assembleDebug --no-daemon --stacktrace` finalizo con `BUILD SUCCESSFUL`.
+- Fase 0: APK debug instalada y lanzada por ADB Wi-Fi en dispositivo `2409BRN2CY` (`lake_eea`).
 
 ### Changed
 
