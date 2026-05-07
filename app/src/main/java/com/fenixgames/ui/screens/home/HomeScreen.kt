@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.clickable
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -17,6 +18,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -24,8 +28,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel) {
+fun HomeScreen(
+    viewModel: HomeViewModel,
+    onOpenDiagnostics: () -> Unit
+) {
     val state by viewModel.state.collectAsState()
+    var titleTaps by remember { mutableIntStateOf(0) }
 
     Scaffold { padding ->
         Column(
@@ -39,7 +47,14 @@ fun HomeScreen(viewModel: HomeViewModel) {
             Text(
                 text = "Fenix Games",
                 fontSize = 32.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable {
+                    titleTaps += 1
+                    if (titleTaps >= 7) {
+                        titleTaps = 0
+                        onOpenDiagnostics()
+                    }
+                }
             )
             Spacer(Modifier.height(24.dp))
             when {
@@ -93,4 +108,3 @@ private fun OfflineCard(
         Text("Siguiente carta")
     }
 }
-

@@ -5,12 +5,16 @@ import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.fenixgames.data.content.ContentPackManager
+import com.fenixgames.data.diagnostics.BlackBoxLogger
+import com.fenixgames.data.diagnostics.DiagnosticRepository
 import com.fenixgames.data.local.AppDatabase
 import com.fenixgames.data.repository.CardRepository
 import com.fenixgames.domain.session.SessionManager
 
 class AppContainer(context: Context) {
     private val appContext = context.applicationContext
+    val blackBoxLogger = BlackBoxLogger(appContext)
+    val diagnosticRepository = DiagnosticRepository(appContext, blackBoxLogger)
 
     val database: AppDatabase = Room.databaseBuilder(
         appContext,

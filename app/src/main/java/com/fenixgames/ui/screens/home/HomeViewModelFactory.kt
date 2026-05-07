@@ -12,10 +12,10 @@ class HomeViewModelFactory(
         if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
             return HomeViewModel(
                 sessionManager = container.sessionManager,
-                cardRepository = container.cardRepository
+                cardRepository = container.cardRepository,
+                diagnosticRepository = container.diagnosticRepository
             ) as T
         }
         error("Unknown ViewModel class: ${modelClass.name}")
     }
 }
-

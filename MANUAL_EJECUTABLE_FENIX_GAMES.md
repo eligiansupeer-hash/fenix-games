@@ -100,6 +100,8 @@ Criterio de aceptacion:
 - El log puede exportarse por SAF.
 - El reporte no contiene datos sensibles en claro.
 
+Estado actual: implementada y validada parcialmente. `assembleDebug` finalizo con `BUILD SUCCESSFUL`; APK instalada y lanzada en Samsung A10 `SM_A105M` y Redmi 14C `2409BRN2CY`. Escritura local confirmada con `run-as com.fenixgames cat files/fenix-blackbox.log` en Samsung A10. Queda pendiente una prueba manual de exportacion SAF desde la pantalla oculta y una prueba de crash artificial supervisada.
+
 ## Fases 3 a 7 - Juegos Offline y Contenido Usuario
 
 - Fase 3: "Yo Nunca", "Verdad", "Reto", "Verdad o Reto", "Mimica/Charadas", puntaje basico y `ScoreScreen`.

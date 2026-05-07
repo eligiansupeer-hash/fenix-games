@@ -2,6 +2,7 @@ package com.fenixgames.ui.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fenixgames.data.diagnostics.DiagnosticRepository
 import com.fenixgames.data.repository.CardRepository
 import com.fenixgames.domain.session.SessionManager
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +13,8 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val sessionManager: SessionManager,
-    private val cardRepository: CardRepository
+    private val cardRepository: CardRepository,
+    private val diagnosticRepository: DiagnosticRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(HomeUiState())
     val state: StateFlow<HomeUiState> = _state.asStateFlow()
@@ -36,7 +38,11 @@ class HomeViewModel(
 
         viewModelScope.launch {
             runCatching { sessionManager.prepare() }
+                .onSuccess {
+                    diagnosticRepository.logInfo("HomeViewModel", "Offline content prepared")
+                }
                 .onFailure { error ->
+                    diagnosticRepository.logError("HomeViewModel", "Offline content failed", error)
                     _state.value = HomeUiState(
                         isLoading = false,
                         error = error.message ?: "Error cargando contenido offline"
@@ -47,8 +53,10 @@ class HomeViewModel(
 
     fun nextCard() {
         viewModelScope.launch {
-            sessionManager.nextCard()
+            runCatching { sessionManager.nextCard() }
+                .onFailure { error ->
+                    diagnosticRepository.logError("HomeViewModel", "Next card failed", error)
+                }
         }
     }
 }
-

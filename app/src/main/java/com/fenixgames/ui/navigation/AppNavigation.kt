@@ -7,11 +7,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.fenixgames.FenixApplication
+import com.fenixgames.ui.screens.diagnostics.DiagnosticScreen
+import com.fenixgames.ui.screens.diagnostics.DiagnosticViewModelFactory
 import com.fenixgames.ui.screens.home.HomeScreen
 import com.fenixgames.ui.screens.home.HomeViewModelFactory
 
 object Routes {
     const val HOME = "home"
+    const val DIAGNOSTICS = "diagnostics"
 }
 
 @Composable
@@ -26,9 +29,17 @@ fun AppNavigation() {
             HomeScreen(
                 viewModel = viewModel(
                     factory = HomeViewModelFactory(app.container)
-                )
+                ),
+                onOpenDiagnostics = { navController.navigate(Routes.DIAGNOSTICS) }
+            )
+        }
+        composable(Routes.DIAGNOSTICS) {
+            DiagnosticScreen(
+                viewModel = viewModel(
+                    factory = DiagnosticViewModelFactory(app.container)
+                ),
+                onBack = { navController.popBackStack() }
             )
         }
     }
 }
-
