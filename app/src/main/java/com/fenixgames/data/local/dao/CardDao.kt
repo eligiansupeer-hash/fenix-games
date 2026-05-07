@@ -17,6 +17,9 @@ interface CardDao {
     @Query("SELECT COUNT(*) FROM packs")
     suspend fun packCount(): Int
 
+    @Query("SELECT version FROM packs WHERE id = :packId LIMIT 1")
+    suspend fun packVersion(packId: String): Int?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPacks(packs: List<PackEntity>)
 
@@ -44,4 +47,3 @@ interface CardDao {
         sessionId: String
     ): CardEntity?
 }
-

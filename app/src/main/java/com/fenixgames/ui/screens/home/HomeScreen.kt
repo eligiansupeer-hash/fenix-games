@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -26,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.fenixgames.domain.model.GameMode
 
 @Composable
 fun HomeScreen(
@@ -65,7 +68,8 @@ fun HomeScreen(
                 )
                 else -> OfflineCard(
                     state = state,
-                    onNext = viewModel::nextCard
+                    onNext = viewModel::nextCard,
+                    onSelectMode = viewModel::selectMode
                 )
             }
         }
@@ -75,12 +79,19 @@ fun HomeScreen(
 @Composable
 private fun OfflineCard(
     state: HomeUiState,
-    onNext: () -> Unit
+    onNext: () -> Unit,
+    onSelectMode: (GameMode) -> Unit
 ) {
     Text(
         text = "Contenido offline cargado: ${state.cardCount} cartas",
         style = MaterialTheme.typography.bodyMedium
     )
+    Spacer(Modifier.height(12.dp))
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        GameModeChip("Yo Nunca", GameMode.NEVER_HAVE_I_EVER, state.selectedMode, onSelectMode)
+        GameModeChip("Verdad", GameMode.TRUTH, state.selectedMode, onSelectMode)
+        GameModeChip("Reto", GameMode.DARE, state.selectedMode, onSelectMode)
+    }
     Spacer(Modifier.height(16.dp))
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -107,4 +118,18 @@ private fun OfflineCard(
     ) {
         Text("Siguiente carta")
     }
+}
+
+@Composable
+private fun GameModeChip(
+    label: String,
+    mode: GameMode,
+    selectedMode: GameMode,
+    onSelectMode: (GameMode) -> Unit
+) {
+    FilterChip(
+        selected = selectedMode == mode,
+        onClick = { onSelectMode(mode) },
+        label = { Text(label) }
+    )
 }

@@ -11,10 +11,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import java.util.UUID
 
 class SessionManager(private val cardRepository: CardRepository) {
-    private val sessionId = UUID.randomUUID().toString()
     private val _state = MutableStateFlow(
         GameSession(
-            id = sessionId,
+            id = UUID.randomUUID().toString(),
             players = listOf(
                 Player(id = "player-1", name = "Player Alpha"),
                 Player(id = "player-2", name = "Player Beta")
@@ -27,6 +26,15 @@ class SessionManager(private val cardRepository: CardRepository) {
 
     suspend fun prepare() {
         cardRepository.ensureBundledContentLoaded()
+        nextCard()
+    }
+
+    suspend fun selectMode(mode: GameMode) {
+        _state.value = _state.value.copy(
+            id = UUID.randomUUID().toString(),
+            mode = mode,
+            round = Round(index = 1, mode = mode)
+        )
         nextCard()
     }
 
@@ -46,4 +54,3 @@ class SessionManager(private val cardRepository: CardRepository) {
         )
     }
 }
-

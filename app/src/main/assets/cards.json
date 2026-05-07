@@ -1,7 +1,7 @@
 {
   "id": "base-family-pack",
   "name": "Fenix Base Familiar",
-  "version": 1,
+  "version": 2,
   "cards": [
     {
       "id": "never-001",
@@ -28,11 +28,34 @@
       "intensity": 0
     },
     {
+      "id": "truth-002",
+      "mode": "TRUTH",
+      "text": "Que regla cambiarias de tu juego favorito?",
+      "intensity": 0
+    },
+    {
+      "id": "truth-003",
+      "mode": "TRUTH",
+      "text": "A quien elegirias como companero de equipo y por que?",
+      "intensity": 0
+    },
+    {
       "id": "dare-001",
       "mode": "DARE",
       "text": "Haz una celebracion silenciosa como si hubieras ganado.",
       "intensity": 0
+    },
+    {
+      "id": "dare-002",
+      "mode": "DARE",
+      "text": "Imita durante diez segundos a alguien muy concentrado.",
+      "intensity": 0
+    },
+    {
+      "id": "dare-003",
+      "mode": "DARE",
+      "text": "Cuenta una historia absurda usando solo tres frases.",
+      "intensity": 0
     }
   ]
 }
-

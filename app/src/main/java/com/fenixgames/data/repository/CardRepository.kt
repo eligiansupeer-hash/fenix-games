@@ -18,9 +18,12 @@ class CardRepository(
     fun observeCardCount(): Flow<Int> = cardDao.observeCardCount()
 
     suspend fun ensureBundledContentLoaded() = withContext(Dispatchers.IO) {
-        if (cardDao.packCount() > 0) return@withContext
-
         val pack = contentPackManager.loadBundledPack()
+        val currentVersion = cardDao.packVersion(pack.id)
+        if (cardDao.packCount() > 0 && currentVersion != null && currentVersion >= pack.version) {
+            return@withContext
+        }
+
         cardDao.insertPacks(
             listOf(
                 PackEntity(
@@ -66,4 +69,3 @@ class CardRepository(
         intensity = intensity
     )
 }
-

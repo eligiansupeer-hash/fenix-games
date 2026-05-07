@@ -112,6 +112,8 @@ Estado actual: implementada y validada parcialmente. `assembleDebug` finalizo co
 
 Cada fase se valida de forma independiente antes de avanzar.
 
+Estado Fase 3 inicial: implementado selector offline para "Yo Nunca", "Verdad" y "Reto" con cambio de modo MVI y mazos locales versionados. Validado con `assembleDebug` exitoso e instalacion/lanzamiento en Samsung A10 `SM_A105M` y Redmi 14C `2409BRN2CY`.
+
 ## Fases 8 y 9 - Red Local Cero Cloud
 
 - Fase 8: sala local multicelular con permisos Android 14, Ktor embebido, Foreground Service, WebSocket, QR, CameraX/ML Kit, lobby, handshake, heartbeat y cierre ordenado.
