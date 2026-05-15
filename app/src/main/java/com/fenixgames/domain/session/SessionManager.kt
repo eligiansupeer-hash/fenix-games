@@ -8,7 +8,9 @@ import com.fenixgames.domain.model.GameSession
 import com.fenixgames.domain.model.PenaltyPolicy
 import com.fenixgames.domain.model.Player
 import com.fenixgames.domain.model.Round
+import com.fenixgames.domain.model.Score
 import com.fenixgames.domain.model.TargetPolicy
+import com.fenixgames.domain.model.Team
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -39,19 +41,22 @@ class SessionManager(private val cardRepository: CardRepository) {
         playerNames: List<String>,
         mode: GameMode,
         rating: ContentRating,
-        penaltyPolicy: PenaltyPolicy
+        penaltyPolicy: PenaltyPolicy,
+        competitionEnabled: Boolean,
+        teamNames: List<String>
     ) {
-        val players = playerNames
-            .map { it.trim() }
-            .filter { it.isNotBlank() }
-            .distinct()
-            .takeIf { it.size >= 2 }
-            ?.mapIndexed { index, name -> Player(id = "player-${index + 1}", name = name) }
-            ?: defaultPlayers
+        val players = parsePlayers(playerNames)
+        val teams = if (competitionEnabled && mode.supportsCompetition) {
+            buildTeams(players, teamNames)
+        } else {
+            emptyList()
+        }
 
         _state.value = GameSession(
             id = UUID.randomUUID().toString(),
             players = players,
+            teams = teams,
+            competitionEnabled = teams.isNotEmpty(),
             mode = mode,
             rating = rating,
             penaltyPolicy = penaltyPolicy,
@@ -83,6 +88,53 @@ class SessionManager(private val cardRepository: CardRepository) {
                 renderedText = card?.render(actor, targetSelection)
             )
         )
+    }
+
+    fun scoreActor(delta: Int) {
+        val current = _state.value
+        val actorId = current.round.actor?.id ?: return
+        val teams = current.teams.map { team ->
+            if (actorId in team.playerIds) {
+                team.copy(score = Score(points = team.score.points + delta))
+            } else {
+                team
+            }
+        }
+        val players = current.players.map { player ->
+            if (player.id == actorId) {
+                player.copy(score = Score(points = player.score.points + delta))
+            } else {
+                player
+            }
+        }
+        _state.value = current.copy(players = players, teams = teams)
+    }
+
+    private fun parsePlayers(playerNames: List<String>): List<Player> =
+        playerNames
+            .map { it.trim() }
+            .filter { it.isNotBlank() }
+            .distinct()
+            .takeIf { it.size >= 2 }
+            ?.mapIndexed { index, name -> Player(id = "player-${index + 1}", name = name) }
+            ?: defaultPlayers
+
+    private fun buildTeams(players: List<Player>, teamNames: List<String>): List<Team> {
+        val names = teamNames
+            .map { it.trim() }
+            .filter { it.isNotBlank() }
+            .distinct()
+            .takeIf { it.size >= 2 }
+            ?: listOf("Equipo A", "Equipo B")
+        return names.mapIndexed { teamIndex, name ->
+            Team(
+                id = "team-${teamIndex + 1}",
+                name = name,
+                playerIds = players
+                    .filterIndexed { playerIndex, _ -> playerIndex % names.size == teamIndex }
+                    .map { it.id }
+            )
+        }.filter { it.playerIds.isNotEmpty() }
     }
 
     private fun selectTargets(

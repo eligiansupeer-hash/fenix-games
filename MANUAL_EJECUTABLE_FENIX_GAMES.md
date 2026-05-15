@@ -114,7 +114,9 @@ Cada fase se valida de forma independiente antes de avanzar.
 
 Estado Fase 3 inicial: implementado selector offline para "Yo Nunca", "Verdad" y "Reto" con cambio de modo MVI y mazos locales versionados. Validado con `assembleDebug` exitoso e instalacion/lanzamiento en Samsung A10 `SM_A105M` y Redmi 14C `2409BRN2CY`.
 
-Replan de contenido presencial: la app elimina modo familiar/ninos y unifica Verdad/Reto dentro de `TRUTH_OR_DARE`; Preguntas de amigos/pareja pasan a `QUESTIONS`. Se agregan niveles `TEEN` y `ADULT_1` a `ADULT_6`, plantillas con `{actor}`, `{target}`, `{targetA}`, `{targetB}`, seleccion automatica de participantes, aviso legal antes de iniciar y penalizaciones de juego. El build de esta migracion quedo bloqueado por AAPT2 en Windows, no por error de producto pendiente.
+Replan de contenido presencial: la app elimina modo familiar/ninos y unifica Verdad/Reto dentro de `TRUTH_OR_DARE`; Preguntas de amigos/pareja pasan a `QUESTIONS`. Se agregan niveles `TEEN` y `ADULT_1` a `ADULT_6`, plantillas con `{actor}`, `{target}`, `{targetA}`, `{targetB}`, seleccion automatica de participantes, aviso legal antes de iniciar y penalizaciones de juego.
+
+Estado expandido: todos los modos del catalogo estan creados (`Yo Nunca`, `Verdad o Reto`, `Preguntas`, `Ruleta`, `Previa`, `Argento`, `Mimica`, `Impostor`, `Tabu`, `Trivia`). El pack local contiene 1400 tarjetas: 20 por cada modo y cada nivel. El validador `tools/validate_cards.py` confirma conteos, ausencia de redes/material externo y placeholders correctos. Los modos competitivos soportan equipos y puntaje; los modos visuales tienen animacion simple de ruleta, dado o simbolo de juego. Build local generado correctamente; queda pendiente instalar en Samsung A10 y Redmi 14C cuando vuelvan a aparecer en ADB.
 
 ## Fases 8 y 9 - Red Local Cero Cloud
 

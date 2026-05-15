@@ -15,6 +15,9 @@ El formato sigue Keep a Changelog y el proyecto usa commits convencionales.
 - Fase 2 Caja Negra: `BlackBoxLogger`, crash handler global, rotacion local, sanitizacion, pantalla diagnostica oculta por 7 taps y exportacion SAF.
 - Fase 3 inicial: selector offline para "Yo Nunca", "Verdad" y "Reto" con cambio de modo MVI y mazos locales separados.
 - Replan presencial: modos definitivos sin `TRUTH`/`DARE` separados, `ContentRating` adolescente/adulto 1-6, tarjetas con plantillas `{actor}`/`{target}`, seleccion automatica de participantes, aviso legal y penalizaciones.
+- Catalogo completo: 10 modos de juego con 20 tarjetas por cada nivel `TEEN` y `ADULT_1..ADULT_6` para un total de 1400 tarjetas.
+- Competencia: soporte de equipos y puntaje para modos que lo permiten.
+- Animaciones: ruleta/botella visual, dado/selector y simbolos animados para modos donde aporta feedback.
 
 ### Validated
 
@@ -28,10 +31,12 @@ El formato sigue Keep a Changelog y el proyecto usa commits convencionales.
 - Fase 2: `run-as com.fenixgames cat files/fenix-blackbox.log` confirmo escritura local del evento `Offline content prepared` en Samsung A10.
 - Fase 3 inicial: `.\gradlew.bat assembleDebug --no-daemon --stacktrace` finalizo con `BUILD SUCCESSFUL`.
 - Fase 3 inicial: APK debug instalada y lanzada por ADB Wi-Fi en Samsung A10 `SM_A105M` y Redmi 14C `2409BRN2CY`; `pidof com.fenixgames` confirmo proceso vivo en ambos.
+- Replan presencial expandido: `python tools\validate_cards.py` confirmo 1400 tarjetas, 10 modos y 20 tarjetas por modo/nivel.
+- Replan presencial expandido: `.\gradlew.bat assembleDebug --no-daemon --no-configuration-cache --console=plain --stacktrace --max-workers=1` finalizo correctamente y genero `app-debug.apk`.
 
 ### Blocked
 
-- Build posterior al replan presencial: Kotlin/KSP alcanzo etapas avanzadas, pero `:app:processDebugResources` fallo por AAPT2 en Windows (`Daemon startup failed`, posible Universal C Runtime/timeout de AAPT2). No se instalo APK nueva de esta migracion.
+- Instalacion movil de la nueva APK: al momento de validar, `adb devices -l` no mostro dispositivos conectados.
 
 ### Changed
 

@@ -34,6 +34,8 @@ class HomeViewModel(
                     selectedMode = session.mode,
                     selectedRating = session.rating,
                     selectedPenalty = session.penaltyPolicy,
+                    competitionEnabled = session.competitionEnabled,
+                    teamScores = session.teams,
                     legalAccepted = session.legalAccepted,
                     currentCardText = session.round.renderedText,
                     roundIndex = session.round.index,
@@ -64,7 +66,11 @@ class HomeViewModel(
     }
 
     fun selectMode(mode: GameMode) {
-        _state.value = _state.value.copy(selectedMode = mode, legalAccepted = false)
+        _state.value = _state.value.copy(
+            selectedMode = mode,
+            competitionEnabled = _state.value.competitionEnabled && mode.supportsCompetition,
+            legalAccepted = false
+        )
     }
 
     fun selectRating(rating: ContentRating) {
@@ -75,6 +81,17 @@ class HomeViewModel(
         _state.value = _state.value.copy(selectedPenalty = policy, legalAccepted = false)
     }
 
+    fun updateTeams(value: String) {
+        _state.value = _state.value.copy(teamsText = value, legalAccepted = false)
+    }
+
+    fun setCompetitionEnabled(enabled: Boolean) {
+        _state.value = _state.value.copy(
+            competitionEnabled = enabled && _state.value.selectedMode.supportsCompetition,
+            legalAccepted = false
+        )
+    }
+
     fun startAcceptedSession() {
         val current = _state.value
         viewModelScope.launch {
@@ -83,7 +100,9 @@ class HomeViewModel(
                     playerNames = current.playersText.split(","),
                     mode = current.selectedMode,
                     rating = current.selectedRating,
-                    penaltyPolicy = current.selectedPenalty
+                    penaltyPolicy = current.selectedPenalty,
+                    competitionEnabled = current.competitionEnabled,
+                    teamNames = current.teamsText.split(",")
                 )
             }
                 .onSuccess {
@@ -106,5 +125,8 @@ class HomeViewModel(
                 }
         }
     }
-}
 
+    fun scoreActor(delta: Int) {
+        sessionManager.scoreActor(delta)
+    }
+}
