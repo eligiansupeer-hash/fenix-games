@@ -30,16 +30,33 @@ EXPECTED_RATINGS = [
     "ADULT_6",
 ]
 
+EXPECTED_CARD_TYPES = {
+    "TRUTH",
+    "DARE",
+    "QUESTION",
+    "ROULETTE",
+    "CHALLENGE",
+    "SECRET",
+    "TRIVIA",
+}
+
 FORBIDDEN = re.compile(
     r"\b(instagram|whatsapp|estado|estados|mensaje|mensajes|foto|fotos|redes|celular|elige|elegi|escoge|escoge)\b",
+    re.IGNORECASE,
+)
+
+BAD_COPY = re.compile(
+    r"(\ufffd|yo nunca admit|me daria curiosidad|personas externas|fuera del grupo)",
     re.IGNORECASE,
 )
 
 
 def main() -> int:
     pack = json.loads(CARDS.read_text(encoding="utf-8"))
-    cards = pack["cards"]
     errors: list[str] = []
+    if not pack.get("name"):
+        errors.append("pack is missing required name")
+    cards = pack["cards"]
     modes = {card["mode"] for card in cards}
     if modes != EXPECTED_MODES:
         errors.append(f"Modes mismatch: {sorted(modes)}")
@@ -53,8 +70,12 @@ def main() -> int:
 
     for card in cards:
         text = card["textTemplate"]
+        if card["cardType"] not in EXPECTED_CARD_TYPES:
+            errors.append(f"{card['id']} has invalid cardType: {card['cardType']}")
         if FORBIDDEN.search(text):
             errors.append(f"{card['id']} contains forbidden external/social wording: {text}")
+        if BAD_COPY.search(text):
+            errors.append(f"{card['id']} contains broken or weak copy: {text}")
         target_policy = card["targetPolicy"]
         if target_policy == "ONE_TARGET" and "{target}" not in text:
             errors.append(f"{card['id']} missing {{target}}")
@@ -76,4 +97,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

@@ -96,6 +96,7 @@ class HomeViewModel(
         val current = _state.value
         viewModelScope.launch {
             runCatching {
+                cardRepository.ensureBundledContentLoaded()
                 sessionManager.startSession(
                     playerNames = current.playersText.split(","),
                     mode = current.selectedMode,

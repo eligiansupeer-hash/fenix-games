@@ -33,11 +33,14 @@ El formato sigue Keep a Changelog y el proyecto usa commits convencionales.
 - Fase 3 inicial: APK debug instalada y lanzada por ADB Wi-Fi en Samsung A10 `SM_A105M` y Redmi 14C `2409BRN2CY`; `pidof com.fenixgames` confirmo proceso vivo en ambos.
 - Replan presencial expandido: `python tools\validate_cards.py` confirmo 1400 tarjetas, 10 modos y 20 tarjetas por modo/nivel.
 - Replan presencial expandido: `.\gradlew.bat assembleDebug --no-daemon --no-configuration-cache --console=plain --stacktrace --max-workers=1` finalizo correctamente y genero `app-debug.apk`.
+- Replan presencial QA Xiaomi: APK instalada por ADB Wi-Fi en Redmi 14C `2409BRN2CY`; arranque limpio, aviso legal, inicio de sesion, carta renderizada con actor `Sofi`, target automatico `Valen`, penalizacion y segunda carta con turno `Nico`.
 
 ### Blocked
 
-- Instalacion movil de la nueva APK: al momento de validar, `adb devices -l` no mostro dispositivos conectados.
+- Validacion completa Samsung A10 del replan expandido queda pendiente para una pasada dedicada.
 
 ### Changed
 
 - Repositorio remoto definitivo actualizado a `eligiansupeer-hash/fenix-games`.
+- Pack de cartas regenerado con generador reproducible, texto ASCII estable y `cardType` compatible con enums Kotlin.
+- Inicio de sesion ahora fuerza la carga del contenido offline antes de pedir la primera carta.

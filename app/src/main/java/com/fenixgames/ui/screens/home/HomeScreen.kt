@@ -313,9 +313,9 @@ private fun ModeAnimation(kind: AnimationKind, roundIndex: Int) {
         AnimationKind.NONE -> Unit
         AnimationKind.ROULETTE -> RouletteAnimation(roundIndex)
         AnimationKind.DICE -> DiceAnimation(roundIndex)
-        AnimationKind.CHARADES -> SymbolAnimation("🎭", "Actuar")
+        AnimationKind.CHARADES -> SymbolAnimation("*", "Actuar")
         AnimationKind.SECRET -> SymbolAnimation("?", "Secreto")
-        AnimationKind.TABOO -> SymbolAnimation("!", "Tabú")
+        AnimationKind.TABOO -> SymbolAnimation("!", "Tabu")
     }
 }
 

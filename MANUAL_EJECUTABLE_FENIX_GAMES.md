@@ -116,7 +116,9 @@ Estado Fase 3 inicial: implementado selector offline para "Yo Nunca", "Verdad" y
 
 Replan de contenido presencial: la app elimina modo familiar/ninos y unifica Verdad/Reto dentro de `TRUTH_OR_DARE`; Preguntas de amigos/pareja pasan a `QUESTIONS`. Se agregan niveles `TEEN` y `ADULT_1` a `ADULT_6`, plantillas con `{actor}`, `{target}`, `{targetA}`, `{targetB}`, seleccion automatica de participantes, aviso legal antes de iniciar y penalizaciones de juego.
 
-Estado expandido: todos los modos del catalogo estan creados (`Yo Nunca`, `Verdad o Reto`, `Preguntas`, `Ruleta`, `Previa`, `Argento`, `Mimica`, `Impostor`, `Tabu`, `Trivia`). El pack local contiene 1400 tarjetas: 20 por cada modo y cada nivel. El validador `tools/validate_cards.py` confirma conteos, ausencia de redes/material externo y placeholders correctos. Los modos competitivos soportan equipos y puntaje; los modos visuales tienen animacion simple de ruleta, dado o simbolo de juego. Build local generado correctamente; queda pendiente instalar en Samsung A10 y Redmi 14C cuando vuelvan a aparecer en ADB.
+Estado expandido: todos los modos del catalogo estan creados (`Yo Nunca`, `Verdad o Reto`, `Preguntas`, `Ruleta`, `Previa`, `Argento`, `Mimica`, `Impostor`, `Tabu`, `Trivia`). El pack local contiene 1400 tarjetas: 20 por cada modo y cada nivel. El validador `tools/validate_cards.py` confirma conteos, ausencia de redes/material externo, `cardType` compatible con enums Kotlin y placeholders correctos. Los modos competitivos soportan equipos y puntaje; los modos visuales tienen animacion simple de ruleta, dado o simbolo de juego.
+
+Validacion Redmi 14C: APK instalada por ADB Wi-Fi en Xiaomi `2409BRN2CY`. En arranque limpio se verifico aviso legal, inicio de sesion, carta renderizada con actor `Sofi`, target automatico `Valen`, penalizacion `Pierde 1 punto` y segunda carta con turno `Nico`. Queda pendiente repetir esta pasada completa en Samsung A10.
 
 ## Fases 8 y 9 - Red Local Cero Cloud
 
