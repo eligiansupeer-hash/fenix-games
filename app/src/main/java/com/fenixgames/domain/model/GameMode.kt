@@ -5,13 +5,14 @@ import kotlinx.serialization.Serializable
 @Serializable
 enum class GameMode {
     NEVER_HAVE_I_EVER,
-    TRUTH,
-    DARE,
     TRUTH_OR_DARE,
+    QUESTIONS,
+    ROULETTE,
+    PREVIA,
+    ARGENTO,
     CHARADES,
     IMPOSTOR,
     TABOO,
-    ROULETTE,
     TRIVIA
 }
 

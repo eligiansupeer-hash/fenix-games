@@ -6,7 +6,11 @@ import com.fenixgames.data.local.entity.CardEntity
 import com.fenixgames.data.local.entity.PackEntity
 import com.fenixgames.data.local.entity.UsedCardEntity
 import com.fenixgames.domain.model.Card
+import com.fenixgames.domain.model.CardType
+import com.fenixgames.domain.model.ContentRating
 import com.fenixgames.domain.model.GameMode
+import com.fenixgames.domain.model.PenaltyPolicy
+import com.fenixgames.domain.model.TargetPolicy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -35,12 +39,18 @@ class CardRepository(
         )
         cardDao.insertCards(
             pack.cards.map { card ->
+                val rating = ContentRating.fromName(card.rating)
                 CardEntity(
                     id = card.id,
                     packId = pack.id,
                     mode = card.mode,
-                    text = card.text,
-                    intensity = card.intensity
+                    rating = rating.name,
+                    ratingRank = rating.rank,
+                    cardType = card.cardType,
+                    category = card.category,
+                    textTemplate = card.textTemplate,
+                    targetPolicy = card.targetPolicy,
+                    penaltyPolicy = card.penaltyPolicy
                 )
             }
         )
@@ -48,14 +58,19 @@ class CardRepository(
 
     suspend fun nextCard(
         mode: GameMode,
-        maxIntensity: Int,
+        rating: ContentRating,
         sessionId: String
     ): Card? = withContext(Dispatchers.IO) {
-        cardDao.nextUnusedCard(mode.name, maxIntensity, sessionId)?.also { entity ->
+        val entity = if (rating == ContentRating.TEEN) {
+            cardDao.nextTeenCard(mode.name, sessionId)
+        } else {
+            cardDao.nextAdultCard(mode.name, rating.rank, sessionId)
+        }
+        entity?.also { card ->
             cardDao.markUsed(
                 UsedCardEntity(
                     sessionId = sessionId,
-                    cardId = entity.id,
+                    cardId = card.id,
                     usedAtEpochMillis = System.currentTimeMillis()
                 )
             )
@@ -65,7 +80,12 @@ class CardRepository(
     private fun CardEntity.toDomain(): Card = Card(
         id = id,
         mode = GameMode.valueOf(mode),
-        text = text,
-        intensity = intensity
+        rating = ContentRating.valueOf(rating),
+        cardType = CardType.valueOf(cardType),
+        category = category,
+        textTemplate = textTemplate,
+        targetPolicy = TargetPolicy.valueOf(targetPolicy),
+        penaltyPolicy = PenaltyPolicy.valueOf(penaltyPolicy)
     )
 }
+

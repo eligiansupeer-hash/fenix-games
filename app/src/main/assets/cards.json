@@ -1,61 +1,188 @@
 {
-  "id": "base-family-pack",
-  "name": "Fenix Base Familiar",
-  "version": 2,
+  "id": "fenix-core-social-pack",
+  "name": "Fenix Core Social",
+  "version": 3,
   "cards": [
     {
-      "id": "never-001",
+      "id": "never-teen-001",
       "mode": "NEVER_HAVE_I_EVER",
-      "text": "Yo nunca me quede despierto hasta tarde jugando.",
-      "intensity": 0
+      "rating": "TEEN",
+      "cardType": "CHALLENGE",
+      "category": "crush y verguenza",
+      "textTemplate": "{actor}, yo nunca hice como que no vi a {target} porque me dio verguenza saludar.",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
     },
     {
-      "id": "never-002",
+      "id": "never-teen-002",
       "mode": "NEVER_HAVE_I_EVER",
-      "text": "Yo nunca invente una regla para ganar una partida.",
-      "intensity": 0
+      "rating": "TEEN",
+      "cardType": "CHALLENGE",
+      "category": "amistad y bardo",
+      "textTemplate": "{actor}, yo nunca me rei de un chiste de {target} solo para quedar bien.",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
     },
     {
-      "id": "never-003",
+      "id": "tod-teen-001",
+      "mode": "TRUTH_OR_DARE",
+      "rating": "TEEN",
+      "cardType": "TRUTH",
+      "category": "verdad incomoda",
+      "textTemplate": "{actor}, verdad: entre {targetA} y {targetB}, quien crees que se hace mas el/la misterioso/a cuando le gusta alguien?",
+      "targetPolicy": "TWO_TARGET_OPTIONS",
+      "penaltyPolicy": "LOSE_POINT"
+    },
+    {
+      "id": "tod-teen-002",
+      "mode": "TRUTH_OR_DARE",
+      "rating": "TEEN",
+      "cardType": "DARE",
+      "category": "chamuyo cringe",
+      "textTemplate": "{actor}, reto: mira a {target} y tirale tu mejor frase de chamuyo exagerada sin reirte.",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
+    },
+    {
+      "id": "questions-teen-001",
+      "mode": "QUESTIONS",
+      "rating": "TEEN",
+      "cardType": "QUESTION",
+      "category": "amistad",
+      "textTemplate": "{actor}, pregunta: que actitud de {target} te da risa aunque nunca se lo digas?",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
+    },
+    {
+      "id": "never-adult1-001",
       "mode": "NEVER_HAVE_I_EVER",
-      "text": "Yo nunca acuse a alguien sin pruebas durante un juego.",
-      "intensity": 0
+      "rating": "ADULT_1",
+      "cardType": "CHALLENGE",
+      "category": "coqueteo",
+      "textTemplate": "{actor}, yo nunca sostuve una mirada con {target} mas tiempo del necesario para ver si habia onda.",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
     },
     {
-      "id": "truth-001",
-      "mode": "TRUTH",
-      "text": "Cual fue la partida mas divertida que recuerdas?",
-      "intensity": 0
+      "id": "tod-adult1-001",
+      "mode": "TRUTH_OR_DARE",
+      "rating": "ADULT_1",
+      "cardType": "TRUTH",
+      "category": "tension verbal",
+      "textTemplate": "{actor}, verdad: que detalle de {target} te parece mas atractivo cuando habla de cerca?",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
     },
     {
-      "id": "truth-002",
-      "mode": "TRUTH",
-      "text": "Que regla cambiarias de tu juego favorito?",
-      "intensity": 0
+      "id": "questions-adult1-001",
+      "mode": "QUESTIONS",
+      "rating": "ADULT_1",
+      "cardType": "QUESTION",
+      "category": "quimica",
+      "textTemplate": "{actor}, pregunta: entre {targetA} y {targetB}, con quien seria mas peligrosa una cena a solas?",
+      "targetPolicy": "TWO_TARGET_OPTIONS",
+      "penaltyPolicy": "LOSE_POINT"
     },
     {
-      "id": "truth-003",
-      "mode": "TRUTH",
-      "text": "A quien elegirias como companero de equipo y por que?",
-      "intensity": 0
+      "id": "tod-adult2-001",
+      "mode": "TRUTH_OR_DARE",
+      "rating": "ADULT_2",
+      "cardType": "DARE",
+      "category": "deseo insinuado",
+      "textTemplate": "{actor}, reto: acercate a {target}, quedate a un palmo de distancia y decile al oido que seria lo mas peligroso de estar a solas.",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
     },
     {
-      "id": "dare-001",
-      "mode": "DARE",
-      "text": "Haz una celebracion silenciosa como si hubieras ganado.",
-      "intensity": 0
+      "id": "never-adult2-001",
+      "mode": "NEVER_HAVE_I_EVER",
+      "rating": "ADULT_2",
+      "cardType": "CHALLENGE",
+      "category": "tension de ronda",
+      "textTemplate": "{actor}, yo nunca imagine que entre {targetA} y {targetB} podria haber mas tension de la que muestran.",
+      "targetPolicy": "TWO_TARGET_OPTIONS",
+      "penaltyPolicy": "LOSE_POINT"
     },
     {
-      "id": "dare-002",
-      "mode": "DARE",
-      "text": "Imita durante diez segundos a alguien muy concentrado.",
-      "intensity": 0
+      "id": "tod-adult3-001",
+      "mode": "TRUTH_OR_DARE",
+      "rating": "ADULT_3",
+      "cardType": "DARE",
+      "category": "besos y proxemica",
+      "textTemplate": "{actor}, reto: dale a {target} un beso breve en la mejilla, lento y con intencion, manteniendo contacto visual al separarte.",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
     },
     {
-      "id": "dare-003",
-      "mode": "DARE",
-      "text": "Cuenta una historia absurda usando solo tres frases.",
-      "intensity": 0
+      "id": "roulette-adult3-001",
+      "mode": "ROULETTE",
+      "rating": "ADULT_3",
+      "cardType": "ROULETTE",
+      "category": "cercania",
+      "textTemplate": "{actor}, ruleta: sentate frente a {target} con las rodillas casi tocandose durante una ronda completa.",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
+    },
+    {
+      "id": "tod-adult4-001",
+      "mode": "TRUTH_OR_DARE",
+      "rating": "ADULT_4",
+      "cardType": "DARE",
+      "category": "caricias intensas",
+      "textTemplate": "{actor}, reto: acaricia lentamente el cuello y los hombros de {target} durante quince segundos, sin romper la mirada.",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOWER_LEVEL_CHALLENGE"
+    },
+    {
+      "id": "questions-adult4-001",
+      "mode": "QUESTIONS",
+      "rating": "ADULT_4",
+      "cardType": "QUESTION",
+      "category": "limites y deseo",
+      "textTemplate": "{actor}, pregunta: que limite no cruzarias aunque {target} te guste demasiado?",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
+    },
+    {
+      "id": "tod-adult5-001",
+      "mode": "TRUTH_OR_DARE",
+      "rating": "ADULT_5",
+      "cardType": "DARE",
+      "category": "prendas e intimidad",
+      "textTemplate": "{actor}, reto: deja que {target} elija una prenda externa que debas quitarte o paga la penalizacion acordada.",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "REMOVE_GARMENT"
+    },
+    {
+      "id": "never-adult5-001",
+      "mode": "NEVER_HAVE_I_EVER",
+      "rating": "ADULT_5",
+      "cardType": "CHALLENGE",
+      "category": "intimidad fuerte",
+      "textTemplate": "{actor}, yo nunca fantasee con terminar una juntada como esta en una habitacion con {target}.",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
+    },
+    {
+      "id": "tod-adult6-001",
+      "mode": "TRUTH_OR_DARE",
+      "rating": "ADULT_6",
+      "cardType": "DARE",
+      "category": "sexual directo consensuado",
+      "textTemplate": "{actor}, reto nivel 6: si {target} tambien acepta, describile en voz baja que tipo de placer sexual consensuado buscarias darle esta noche; si no, paga la penalizacion.",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "REMOVE_GARMENT"
+    },
+    {
+      "id": "questions-adult6-001",
+      "mode": "QUESTIONS",
+      "rating": "ADULT_6",
+      "cardType": "QUESTION",
+      "category": "placer y limites",
+      "textTemplate": "{actor}, pregunta nivel 6: con {target}, que regla de consentimiento pondrias antes de pasar de la provocacion al sexo?",
+      "targetPolicy": "ONE_TARGET",
+      "penaltyPolicy": "LOSE_POINT"
     }
   ]
 }
+

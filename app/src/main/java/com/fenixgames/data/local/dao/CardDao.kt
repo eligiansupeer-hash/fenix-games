@@ -33,7 +33,7 @@ interface CardDao {
         """
         SELECT * FROM cards
         WHERE mode = :mode
-        AND intensity <= :maxIntensity
+        AND rating = 'TEEN'
         AND id NOT IN (
             SELECT cardId FROM used_cards WHERE sessionId = :sessionId
         )
@@ -41,9 +41,27 @@ interface CardDao {
         LIMIT 1
         """
     )
-    suspend fun nextUnusedCard(
+    suspend fun nextTeenCard(
         mode: String,
-        maxIntensity: Int,
+        sessionId: String
+    ): CardEntity?
+
+    @Query(
+        """
+        SELECT * FROM cards
+        WHERE mode = :mode
+        AND ratingRank BETWEEN 1 AND :maxRatingRank
+        AND id NOT IN (
+            SELECT cardId FROM used_cards WHERE sessionId = :sessionId
+        )
+        ORDER BY RANDOM()
+        LIMIT 1
+        """
+    )
+    suspend fun nextAdultCard(
+        mode: String,
+        maxRatingRank: Int,
         sessionId: String
     ): CardEntity?
 }
+

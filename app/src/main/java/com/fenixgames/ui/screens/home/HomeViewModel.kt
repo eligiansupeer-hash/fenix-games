@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fenixgames.data.diagnostics.DiagnosticRepository
 import com.fenixgames.data.repository.CardRepository
+import com.fenixgames.domain.model.ContentRating
 import com.fenixgames.domain.model.GameMode
+import com.fenixgames.domain.model.PenaltyPolicy
 import com.fenixgames.domain.session.SessionManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,12 +28,16 @@ class HomeViewModel(
                 cardRepository.observeCardCount(),
                 sessionManager.state
             ) { count, session ->
-                HomeUiState(
+                _state.value.copy(
                     isLoading = false,
                     cardCount = count,
                     selectedMode = session.mode,
-                    currentCardText = session.round.currentCard?.text,
-                    roundIndex = session.round.index
+                    selectedRating = session.rating,
+                    selectedPenalty = session.penaltyPolicy,
+                    legalAccepted = session.legalAccepted,
+                    currentCardText = session.round.renderedText,
+                    roundIndex = session.round.index,
+                    actorName = session.round.actor?.name
                 )
             }.collect { uiState ->
                 _state.value = uiState
@@ -45,10 +51,49 @@ class HomeViewModel(
                 }
                 .onFailure { error ->
                     diagnosticRepository.logError("HomeViewModel", "Offline content failed", error)
-                    _state.value = HomeUiState(
+                    _state.value = _state.value.copy(
                         isLoading = false,
                         error = error.message ?: "Error cargando contenido offline"
                     )
+                }
+        }
+    }
+
+    fun updatePlayers(value: String) {
+        _state.value = _state.value.copy(playersText = value)
+    }
+
+    fun selectMode(mode: GameMode) {
+        _state.value = _state.value.copy(selectedMode = mode, legalAccepted = false)
+    }
+
+    fun selectRating(rating: ContentRating) {
+        _state.value = _state.value.copy(selectedRating = rating, legalAccepted = false)
+    }
+
+    fun selectPenalty(policy: PenaltyPolicy) {
+        _state.value = _state.value.copy(selectedPenalty = policy, legalAccepted = false)
+    }
+
+    fun startAcceptedSession() {
+        val current = _state.value
+        viewModelScope.launch {
+            runCatching {
+                sessionManager.startSession(
+                    playerNames = current.playersText.split(","),
+                    mode = current.selectedMode,
+                    rating = current.selectedRating,
+                    penaltyPolicy = current.selectedPenalty
+                )
+            }
+                .onSuccess {
+                    diagnosticRepository.logInfo(
+                        "HomeViewModel",
+                        "Session accepted: ${current.selectedMode.name}/${current.selectedRating.name}"
+                    )
+                }
+                .onFailure { error ->
+                    diagnosticRepository.logError("HomeViewModel", "Session start failed", error)
                 }
         }
     }
@@ -61,16 +106,5 @@ class HomeViewModel(
                 }
         }
     }
-
-    fun selectMode(mode: GameMode) {
-        viewModelScope.launch {
-            runCatching { sessionManager.selectMode(mode) }
-                .onSuccess {
-                    diagnosticRepository.logInfo("HomeViewModel", "Game mode selected: ${mode.name}")
-                }
-                .onFailure { error ->
-                    diagnosticRepository.logError("HomeViewModel", "Mode change failed", error)
-                }
-        }
-    }
 }
+

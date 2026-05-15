@@ -22,6 +22,7 @@ class AppContainer(context: Context) {
         "fenix-games.db"
     )
         .addMigrations(MIGRATION_1_2)
+        .addMigrations(MIGRATION_2_3)
         .build()
 
     val contentPackManager = ContentPackManager(appContext)
@@ -43,20 +44,33 @@ class AppContainer(context: Context) {
                     )
                     """.trimIndent()
                 )
+            }
+        }
+
+        val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("DROP TABLE IF EXISTS cards")
+                db.execSQL("DROP TABLE IF EXISTS used_cards")
                 db.execSQL(
                     """
                     CREATE TABLE IF NOT EXISTS cards (
                         id TEXT NOT NULL PRIMARY KEY,
                         packId TEXT NOT NULL,
                         mode TEXT NOT NULL,
-                        text TEXT NOT NULL,
-                        intensity INTEGER NOT NULL
+                        rating TEXT NOT NULL,
+                        ratingRank INTEGER NOT NULL,
+                        cardType TEXT NOT NULL,
+                        category TEXT NOT NULL,
+                        textTemplate TEXT NOT NULL,
+                        targetPolicy TEXT NOT NULL,
+                        penaltyPolicy TEXT NOT NULL
                     )
                     """.trimIndent()
                 )
                 db.execSQL("CREATE INDEX IF NOT EXISTS index_cards_packId ON cards(packId)")
                 db.execSQL("CREATE INDEX IF NOT EXISTS index_cards_mode ON cards(mode)")
-                db.execSQL("CREATE INDEX IF NOT EXISTS index_cards_intensity ON cards(intensity)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_cards_rating ON cards(rating)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_cards_ratingRank ON cards(ratingRank)")
                 db.execSQL(
                     """
                     CREATE TABLE IF NOT EXISTS used_cards (

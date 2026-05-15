@@ -114,6 +114,8 @@ Cada fase se valida de forma independiente antes de avanzar.
 
 Estado Fase 3 inicial: implementado selector offline para "Yo Nunca", "Verdad" y "Reto" con cambio de modo MVI y mazos locales versionados. Validado con `assembleDebug` exitoso e instalacion/lanzamiento en Samsung A10 `SM_A105M` y Redmi 14C `2409BRN2CY`.
 
+Replan de contenido presencial: la app elimina modo familiar/ninos y unifica Verdad/Reto dentro de `TRUTH_OR_DARE`; Preguntas de amigos/pareja pasan a `QUESTIONS`. Se agregan niveles `TEEN` y `ADULT_1` a `ADULT_6`, plantillas con `{actor}`, `{target}`, `{targetA}`, `{targetB}`, seleccion automatica de participantes, aviso legal antes de iniciar y penalizaciones de juego. El build de esta migracion quedo bloqueado por AAPT2 en Windows, no por error de producto pendiente.
+
 ## Fases 8 y 9 - Red Local Cero Cloud
 
 - Fase 8: sala local multicelular con permisos Android 14, Ktor embebido, Foreground Service, WebSocket, QR, CameraX/ML Kit, lobby, handshake, heartbeat y cierre ordenado.

@@ -9,14 +9,20 @@ import androidx.room.PrimaryKey
     indices = [
         Index("packId"),
         Index("mode"),
-        Index("intensity")
+        Index("rating"),
+        Index("ratingRank")
     ]
 )
 data class CardEntity(
     @PrimaryKey val id: String,
     val packId: String,
     val mode: String,
-    val text: String,
-    val intensity: Int
+    val rating: String,
+    val ratingRank: Int,
+    val cardType: String,
+    val category: String,
+    val textTemplate: String,
+    val targetPolicy: String,
+    val penaltyPolicy: String
 )
 

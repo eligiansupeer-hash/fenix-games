@@ -14,7 +14,11 @@ data class ContentPackDto(
 data class CardDto(
     val id: String,
     val mode: String,
-    val text: String,
-    val intensity: Int = 0
+    val rating: String,
+    val cardType: String,
+    val category: String,
+    val textTemplate: String,
+    val targetPolicy: String,
+    val penaltyPolicy: String
 )
 
